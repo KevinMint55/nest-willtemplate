@@ -1,6 +1,13 @@
-import { Controller, Get, Post, Body } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  HttpException,
+  HttpStatus,
+} from '@nestjs/common';
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
+import { ForbiddenException } from 'common/exception/forbidden.exception';
 
 @Controller('cats')
 export class CatsController {
@@ -18,6 +25,8 @@ export class CatsController {
 
   @Get()
   async findAll(): Promise<Cat[]> {
+    throw new ForbiddenException();
+    throw new HttpException('Forbiddenddddd', HttpStatus.FORBIDDEN);
     return this.catsService.findAll();
   }
 }
