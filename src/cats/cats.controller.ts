@@ -25,8 +25,8 @@ export class CatsController {
 
   @Get()
   async findAll(): Promise<Cat[]> {
-    throw new ForbiddenException();
-    throw new HttpException('Forbiddenddddd', HttpStatus.FORBIDDEN);
+    // throw new ForbiddenException();
+    // throw new HttpException('Forbiddenddddd', HttpStatus.FORBIDDEN);
     return this.catsService.findAll();
   }
 }
