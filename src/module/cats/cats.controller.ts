@@ -8,10 +8,11 @@ import {
 import { CatsService } from './cats.service';
 import { Cat } from './interfaces/cat.interface';
 import { ForbiddenException } from 'common/exception/forbidden.exception';
+import config from 'config';
 
 @Controller('cats')
 export class CatsController {
-  constructor(private catsService: CatsService) {}
+  constructor(private catsService: CatsService) { }
 
   @Post()
   async create() {
@@ -25,6 +26,7 @@ export class CatsController {
 
   @Get()
   async findAll(): Promise<Cat[]> {
+    console.log(config);
     // throw new ForbiddenException();
     // throw new HttpException('Forbiddenddddd', HttpStatus.FORBIDDEN);
     return this.catsService.findAll();

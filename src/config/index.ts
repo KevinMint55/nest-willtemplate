@@ -1,3 +1,6 @@
+import fs from 'fs';
+import * as yaml from 'js-yaml';
+import path from 'path';
 import { plainToClass } from 'class-transformer';
 import { IsEnum, IsNumber, validateSync } from 'class-validator';
 
@@ -16,6 +19,8 @@ class EnvironmentVariables {
   APP_PORT: number;
 }
 
+const YAML_CONFIG_FILENAME = 'config.yml';
+
 export function validate(config: Record<string, unknown>) {
   const validatedConfig = plainToClass(EnvironmentVariables, config, {
     enableImplicitConversion: true,
@@ -29,3 +34,14 @@ export function validate(config: Record<string, unknown>) {
   }
   return validatedConfig;
 }
+
+export function getConfig(filePath: string) {
+  const config = yaml.load(
+    fs.readFileSync(filePath, 'utf8'),
+  );
+  return validate(config[process.env.NODE_ENV]);
+};
+
+const config = getConfig(path.resolve(__dirname, YAML_CONFIG_FILENAME));
+
+export default config;
