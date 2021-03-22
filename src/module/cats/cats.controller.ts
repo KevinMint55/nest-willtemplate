@@ -12,7 +12,7 @@ import config from 'config';
 
 @Controller('cats')
 export class CatsController {
-  constructor(private catsService: CatsService) { }
+  constructor(private catsService: CatsService) {}
 
   @Post()
   async create() {

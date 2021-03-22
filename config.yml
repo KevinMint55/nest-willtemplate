@@ -2,11 +2,9 @@ development:
   NODE_ENV: development
   # APP
   APP_PORT: 8000
-  
+
   # auth
   SECRET_SALT: NEST
 
   # mongodb
-  DATABASE_USER: willwuwei
-  DATABASE_PASSWORD: 123456
-  DATABASE_URL: mongodb://server:server@127.0.0.1:27017/admin
+  MONGODB_URL: mongodb://user:password@localhost:27017/db

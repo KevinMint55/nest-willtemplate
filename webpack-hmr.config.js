@@ -1,7 +1,16 @@
 const path = require('path');
+const fs = require('fs');
 const nodeExternals = require('webpack-node-externals');
 const { RunScriptWebpackPlugin } = require('run-script-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+
+const resolve = function (dir) {
+  if (fs.existsSync(path.resolve(dir))) {
+    return path.resolve(dir);
+  } else {
+    return '';
+  }
+};
 
 module.exports = function (options, webpack) {
   return {
@@ -23,7 +32,7 @@ module.exports = function (options, webpack) {
       new CopyWebpackPlugin({
         patterns: [
           {
-            from: path.resolve('config.yml'),
+            from: resolve('config.local.yml') || resolve('config.yml'),
             to: 'config.yml',
           },
         ],

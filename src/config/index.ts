@@ -17,6 +17,8 @@ class EnvironmentVariables {
 
   @IsNumber()
   APP_PORT: number;
+
+  MONGODB_URL: string;
 }
 
 const YAML_CONFIG_FILENAME = 'config.yml';
@@ -36,11 +38,9 @@ export function validate(config: Record<string, unknown>) {
 }
 
 export function getConfig(filePath: string) {
-  const config = yaml.load(
-    fs.readFileSync(filePath, 'utf8'),
-  );
+  const config = yaml.load(fs.readFileSync(filePath, 'utf8'));
   return validate(config[process.env.NODE_ENV]);
-};
+}
 
 const config = getConfig(path.resolve(__dirname, YAML_CONFIG_FILENAME));
 
