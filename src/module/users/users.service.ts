@@ -16,7 +16,6 @@ export class UsersService {
       nickname: user.username,
       password: user.password,
     };
-    console.log(user, 222);
     const createUser = new this.userModel(userData);
     return createUser.save();
   }
